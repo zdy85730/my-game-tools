@@ -58,6 +58,12 @@ jobs:
         path: ${{ fromJson(needs.detect.outputs.backends) }}
     environment:
       name: production
+    env:
+      DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+      DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+      DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+      DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+      DEPLOY_BASE_PATH: ${{ secrets.DEPLOY_BASE_PATH }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -108,7 +114,7 @@ jobs:
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
 
       - name: Copy deploy files
-        if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_PORT != '' && secrets.DEPLOY_USER != '' && secrets.DEPLOY_SSH_KEY != '' && secrets.DEPLOY_BASE_PATH != '' }}
+        if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_PORT != '' && env.DEPLOY_USER != '' && env.DEPLOY_SSH_KEY != '' && env.DEPLOY_BASE_PATH != '' }}
         uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -120,7 +126,7 @@ jobs:
           target: "${{ secrets.DEPLOY_BASE_PATH }}/${{ steps.meta.outputs.game }}/${{ steps.meta.outputs.tool }}/backend"
 
       - name: Deploy on server
-        if: ${{ secrets.DEPLOY_HOST != '' && secrets.DEPLOY_PORT != '' && secrets.DEPLOY_USER != '' && secrets.DEPLOY_SSH_KEY != '' && secrets.DEPLOY_BASE_PATH != '' }}
+        if: ${{ env.DEPLOY_HOST != '' && env.DEPLOY_PORT != '' && env.DEPLOY_USER != '' && env.DEPLOY_SSH_KEY != '' && env.DEPLOY_BASE_PATH != '' }}
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
