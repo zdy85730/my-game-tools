@@ -1,0 +1,16 @@
+{
+  "name": "@my-game-tools/design-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme.css": "./src/theme.css"
+  },
+  "scripts": {
+    "lint:workspace": "pnpm exec biome check . && pnpm exec stylelint \"src/**/*.css\" --allow-empty-input",
+    "typecheck": "pnpm exec tsc --noEmit -p tsconfig.json",
+    "test": "node --test",
+    "build": "pnpm exec tsc --noEmit -p tsconfig.json"
+  }
+}

@@ -1,0 +1,151 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      frontends: ${{ steps.changed.outputs.frontends }}
+      backends: ${{ steps.changed.outputs.backends }}
+      core_changed: ${{ steps.changed.outputs.core_changed }}
+      pages_affected: ${{ steps.changed.outputs.pages_affected }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve diff range
+        id: range
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "base=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+            echo "head=${{ github.event.pull_request.head.sha }}" >> "$GITHUB_OUTPUT"
+          else
+            if [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
+              echo "base=$(git rev-parse HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)" >> "$GITHUB_OUTPUT"
+            else
+              echo "base=${{ github.event.before }}" >> "$GITHUB_OUTPUT"
+            fi
+            echo "head=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Detect changed scopes
+        id: changed
+        run: pnpm exec tsx scripts/github/changed-scopes.ts --base "${{ steps.range.outputs.base }}" --head "${{ steps.range.outputs.head }}"
+
+  verify-core:
+    runs-on: ubuntu-latest
+    needs: detect
+    if: needs.detect.outputs.core_changed == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run full validation
+        run: pnpm check
+
+  verify-frontends:
+    runs-on: ubuntu-latest
+    needs: detect
+    if: needs.detect.outputs.frontends != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        path: ${{ fromJson(needs.detect.outputs.frontends) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm --dir "${{ matrix.path }}" lint:workspace
+
+      - name: Typecheck
+        run: pnpm --dir "${{ matrix.path }}" typecheck
+
+      - name: Test
+        run: pnpm --dir "${{ matrix.path }}" test
+
+      - name: Build
+        run: pnpm --dir "${{ matrix.path }}" build
+
+  verify-backends:
+    runs-on: ubuntu-latest
+    needs: detect
+    if: needs.detect.outputs.backends != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        path: ${{ fromJson(needs.detect.outputs.backends) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm --dir "${{ matrix.path }}" lint:workspace
+
+      - name: Typecheck
+        run: pnpm --dir "${{ matrix.path }}" typecheck
+
+      - name: Test
+        run: pnpm --dir "${{ matrix.path }}" test
+
+      - name: Build
+        run: pnpm --dir "${{ matrix.path }}" build

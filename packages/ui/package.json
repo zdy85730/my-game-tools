@@ -1,0 +1,27 @@
+{
+  "name": "@my-game-tools/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@my-game-tools/design-tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "lint:workspace": "pnpm exec biome check . && pnpm exec stylelint \"src/**/*.css\" --allow-empty-input",
+    "typecheck": "pnpm exec tsc --noEmit -p tsconfig.json",
+    "test": "node --test",
+    "build": "pnpm exec tsc --noEmit -p tsconfig.json"
+  }
+}

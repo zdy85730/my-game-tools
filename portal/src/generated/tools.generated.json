@@ -1,0 +1,38 @@
+[
+  {
+    "gameId": "arcade",
+    "toolId": "drop-rate-simulator",
+    "title": "掉落率模拟器",
+    "description": "用简洁的概率模型预估掉落次数与保底区间。",
+    "pagesPath": "arcade/drop-rate-simulator",
+    "hasBackend": false,
+    "tags": [
+      "概率",
+      "掉落"
+    ],
+    "sortOrder": 10,
+    "themeVariant": "default",
+    "status": "stable",
+    "frontendDevPort": 4300,
+    "frontendPath": "arcade/drop-rate-simulator/frontend"
+  },
+  {
+    "gameId": "sandbox",
+    "toolId": "battle-lab",
+    "title": "战斗实验室",
+    "description": "带后端示例的策略面板，演示统一数据表与部署链路。",
+    "pagesPath": "sandbox/battle-lab",
+    "hasBackend": true,
+    "tags": [
+      "阵容",
+      "接口"
+    ],
+    "sortOrder": 20,
+    "themeVariant": "dense",
+    "status": "beta",
+    "frontendDevPort": 4301,
+    "backendDevPort": 3301,
+    "frontendPath": "sandbox/battle-lab/frontend",
+    "backendPath": "sandbox/battle-lab/backend"
+  }
+]

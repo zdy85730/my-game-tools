@@ -1,0 +1,22 @@
+{
+  "name": "@my-game-tools/sandbox-battle-lab-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm exec tsx watch src/server.ts",
+    "build": "pnpm exec tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "lint:workspace": "pnpm exec biome check .",
+    "typecheck": "pnpm exec tsc --noEmit -p tsconfig.json",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.2",
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

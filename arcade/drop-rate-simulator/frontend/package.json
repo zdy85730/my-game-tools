@@ -1,0 +1,27 @@
+{
+  "name": "@my-game-tools/arcade-drop-rate-simulator-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint:workspace": "pnpm exec biome check . && pnpm exec stylelint \"src/**/*.css\" --allow-empty-input",
+    "typecheck": "pnpm exec tsc --noEmit -p tsconfig.app.json && pnpm exec tsc --noEmit -p tsconfig.node.json",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@my-game-tools/config": "workspace:*",
+    "@my-game-tools/ui": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}

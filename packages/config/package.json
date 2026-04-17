@@ -1,0 +1,15 @@
+{
+  "name": "@my-game-tools/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint:workspace": "pnpm exec biome check .",
+    "typecheck": "pnpm exec tsc --noEmit -p tsconfig.json",
+    "test": "node --test",
+    "build": "pnpm exec tsc --noEmit -p tsconfig.json"
+  }
+}

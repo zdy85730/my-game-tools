@@ -1,0 +1,15 @@
+.tool-layout {
+  display: grid;
+  gap: var(--mgt-space-6);
+}
+
+.tool-grid {
+  display: grid;
+  gap: var(--mgt-space-5);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.tool-copy {
+  display: grid;
+  gap: var(--mgt-space-3);
+}

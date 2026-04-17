@@ -1,0 +1,34 @@
+.portal-section {
+  display: grid;
+  gap: var(--mgt-space-5);
+}
+
+.portal-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mgt-space-4);
+}
+
+.portal-section__header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.portal-section__header p {
+  margin: 0.4rem 0 0;
+  color: var(--mgt-text-secondary);
+}
+
+.portal-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mgt-space-3);
+}
+
+.portal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mgt-space-2);
+}

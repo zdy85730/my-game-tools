@@ -1,0 +1,9 @@
+services:
+  sandbox-battle-lab-backend:
+    container_name: sandbox-battle-lab-backend
+    image: ${IMAGE_REF:?IMAGE_REF is required}
+    restart: unless-stopped
+    env_file:
+      - ../.env.production
+    ports:
+      - '${PORT:-3301}:3301'

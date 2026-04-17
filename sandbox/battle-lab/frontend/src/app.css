@@ -1,0 +1,14 @@
+.battle-lab {
+  display: grid;
+  gap: var(--mgt-space-6);
+}
+
+.battle-lab__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mgt-space-3);
+}
+
+.battle-lab__toolbar select {
+  min-width: 180px;
+}

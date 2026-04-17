@@ -1,0 +1,42 @@
+{
+  "name": "my-game-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "dev:portal": "pnpm exec tsx scripts/generate-tool-manifest.ts && pnpm --filter @my-game-tools/portal dev",
+    "manifest": "pnpm exec tsx scripts/generate-tool-manifest.ts",
+    "build": "pnpm -r --if-present run build",
+    "build:pages": "pnpm exec tsx scripts/build-pages.ts",
+    "lint": "pnpm lint:repo && pnpm -r --if-present run lint:workspace",
+    "lint:repo": "pnpm exec biome check . && pnpm exec stylelint \"**/*.css\" --allow-empty-input",
+    "lint:fix": "pnpm exec biome check . --write && pnpm exec stylelint \"**/*.css\" --fix --allow-empty-input",
+    "lint-staged": "lint-staged",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "test": "pnpm -r --if-present run test",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build:pages",
+    "new:tool": "pnpm exec tsx scripts/new-tool.ts"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,tsx,json,md}": ["pnpm exec biome check --write --no-errors-on-unmatched"],
+    "*.css": ["pnpm exec stylelint --fix --allow-empty-input"]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@types/node": "^22.15.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "stylelint": "^16.17.0",
+    "stylelint-config-standard": "^37.0.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

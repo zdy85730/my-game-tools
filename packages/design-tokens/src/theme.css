@@ -1,0 +1,120 @@
+:root {
+  color-scheme: light;
+  --mgt-font-family: "HarmonyOS Sans SC", "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+  --mgt-bg-base: #f1f1ef;
+  --mgt-bg-surface: rgb(247 247 244 / 85%);
+  --mgt-bg-panel: #fbfbf9;
+  --mgt-bg-panel-strong: #efefeb;
+  --mgt-bg-elevated: #ffffff;
+  --mgt-text-primary: #20201d;
+  --mgt-text-secondary: #4f5049;
+  --mgt-text-tertiary: #76786f;
+  --mgt-text-inverse: #f7f7f3;
+  --mgt-border-subtle: rgb(32 32 29 / 8%);
+  --mgt-border-strong: rgb(32 32 29 / 16%);
+  --mgt-border-focus: rgb(32 32 29 / 28%);
+  --mgt-shadow-sm: 0 12px 32px rgb(18 18 18 / 8%);
+  --mgt-shadow-md: 0 24px 56px rgb(18 18 18 / 12%);
+  --mgt-shadow-lg: 0 30px 70px rgb(18 18 18 / 16%);
+  --mgt-overlay: rgb(20 20 20 / 52%);
+  --mgt-accent: #262621;
+  --mgt-accent-soft: #d8d7d1;
+  --mgt-accent-contrast: #f8f8f6;
+  --mgt-success: #1f6c4e;
+  --mgt-warning: #8c6122;
+  --mgt-danger: #9c3d31;
+  --mgt-info: #465872;
+  --mgt-radius-xs: 12px;
+  --mgt-radius-sm: 18px;
+  --mgt-radius-md: 24px;
+  --mgt-radius-lg: 32px;
+  --mgt-radius-xl: 42px;
+  --mgt-space-1: 0.375rem;
+  --mgt-space-2: 0.5rem;
+  --mgt-space-3: 0.75rem;
+  --mgt-space-4: 1rem;
+  --mgt-space-5: 1.25rem;
+  --mgt-space-6: 1.5rem;
+  --mgt-space-7: 2rem;
+  --mgt-space-8: 2.5rem;
+  --mgt-space-9: 3rem;
+  --mgt-space-10: 4rem;
+  --mgt-max-width: 1240px;
+  --mgt-transition-fast: 140ms ease;
+  --mgt-transition-base: 220ms ease;
+  --mgt-transition-slow: 360ms cubic-bezier(0.16, 1, 0.3, 1);
+  --mgt-stripe: linear-gradient(
+    -45deg,
+    transparent 0 16%,
+    rgb(32 32 29 / 8%) 16% 32%,
+    transparent 32% 50%,
+    rgb(32 32 29 / 8%) 50% 66%,
+    transparent 66% 100%
+  );
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --mgt-bg-base: #121211;
+  --mgt-bg-surface: rgb(33 33 31 / 88%);
+  --mgt-bg-panel: #181816;
+  --mgt-bg-panel-strong: #21211e;
+  --mgt-bg-elevated: #1d1d1a;
+  --mgt-text-primary: #f3f2ee;
+  --mgt-text-secondary: #d0cfc8;
+  --mgt-text-tertiary: #9d9d95;
+  --mgt-text-inverse: #10100f;
+  --mgt-border-subtle: rgb(255 255 255 / 8%);
+  --mgt-border-strong: rgb(255 255 255 / 16%);
+  --mgt-border-focus: rgb(255 255 255 / 24%);
+  --mgt-shadow-sm: 0 12px 32px rgb(0 0 0 / 22%);
+  --mgt-shadow-md: 0 24px 56px rgb(0 0 0 / 30%);
+  --mgt-shadow-lg: 0 30px 70px rgb(0 0 0 / 42%);
+  --mgt-overlay: rgb(0 0 0 / 62%);
+  --mgt-accent: #f0efe9;
+  --mgt-accent-soft: #32322e;
+  --mgt-accent-contrast: #10100f;
+  --mgt-success: #7ae2b2;
+  --mgt-warning: #f4c97d;
+  --mgt-danger: #f5a59d;
+  --mgt-info: #b5cbeb;
+  --mgt-stripe: linear-gradient(
+    -45deg,
+    transparent 0 16%,
+    rgb(255 255 255 / 9%) 16% 32%,
+    transparent 32% 50%,
+    rgb(255 255 255 / 9%) 50% 66%,
+    transparent 66% 100%
+  );
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: radial-gradient(circle at top, rgb(255 255 255 / 32%), transparent 34%),
+    linear-gradient(180deg, rgb(255 255 255 / 14%), transparent 24%), var(--mgt-bg-base);
+  font-family: var(--mgt-font-family);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: transparent;
+  color: var(--mgt-text-primary);
+  font-family: var(--mgt-font-family);
+  transition: background-color var(--mgt-transition-base), color var(--mgt-transition-base);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
