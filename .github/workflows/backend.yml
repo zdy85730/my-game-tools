@@ -135,6 +135,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
+          command_timeout: 30m
           script: |
             set -eu
             TARGET_DIR="${{ secrets.DEPLOY_BASE_PATH }}/${{ steps.meta.outputs.game }}/${{ steps.meta.outputs.tool }}/backend"
