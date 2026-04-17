@@ -470,7 +470,10 @@ CMD ["node", "dist/server.js"]
 services:
   ${args.game}-${args.tool}-backend:
     container_name: ${args.game}-${args.tool}-backend
-    image: \${IMAGE_REF:?IMAGE_REF is required}
+    build:
+      context: ../../../../
+      dockerfile: ${args.game}/${args.tool}/backend/Dockerfile
+    image: ${args.game}-${args.tool}-backend:local
     restart: unless-stopped
     env_file:
       - ../.env.production

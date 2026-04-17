@@ -1,7 +1,10 @@
 services:
   sandbox-battle-lab-backend:
     container_name: sandbox-battle-lab-backend
-    image: ${IMAGE_REF:?IMAGE_REF is required}
+    build:
+      context: ../../../../
+      dockerfile: sandbox/battle-lab/backend/Dockerfile
+    image: sandbox-battle-lab-backend:local
     restart: unless-stopped
     env_file:
       - ../.env.production
