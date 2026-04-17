@@ -29,6 +29,8 @@
 - `DEPLOY_BASE_PATH`
 - `DEPLOY_FINGERPRINT`
 
+后端部署不会将镜像推送到外部镜像仓库，而是通过 SSH 将后端的最小构建上下文同步到服务器，并在服务器本地执行 `docker compose up -d --build`。
+
 Pages 采用 GitHub Actions 官方部署链路，无需额外凭据。
 
 ## New Tool Checklist
