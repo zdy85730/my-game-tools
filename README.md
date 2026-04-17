@@ -44,4 +44,5 @@ scripts/
 
 - `main` 分支合并后自动部署 GitHub Pages
 - 变更的后端服务在 `main` 合并后通过 SSH 上传最小构建上下文，并在生产服务器本地执行 `docker compose up -d --build`
+- 当前生产方案不使用付费容器镜像仓库；腾讯云服务器应为 Docker 配置免费镜像加速，例如 `https://mirror.ccs.tencentyun.com`
 - 生产部署依赖 GitHub Secrets，详见 [CONTRIBUTING.md](./CONTRIBUTING.md)
