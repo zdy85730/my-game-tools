@@ -123,6 +123,7 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           fingerprint: ${{ secrets.DEPLOY_FINGERPRINT }}
           source: "${{ matrix.path }}/deploy/compose.yaml,${{ matrix.path }}/.env.production.example"
+          strip_components: 3
           target: "${{ secrets.DEPLOY_BASE_PATH }}/${{ steps.meta.outputs.game }}/${{ steps.meta.outputs.tool }}/backend"
 
       - name: Deploy on server
