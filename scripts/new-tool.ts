@@ -435,7 +435,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
 COPY ${args.game}/${args.tool}/backend ./${args.game}/${args.tool}/backend
 
-RUN pnpm install --filter ${packagePrefix}-backend... --frozen-lockfile
+RUN pnpm install --filter ${packagePrefix}-backend... --frozen-lockfile --ignore-scripts
 RUN pnpm --dir ${args.game}/${args.tool}/backend build
 
 FROM node:22-alpine AS runtime
@@ -450,7 +450,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY ${args.game}/${args.tool}/backend/package.json ./${args.game}/${args.tool}/backend/package.json
 
-RUN pnpm install --prod --filter ${packagePrefix}-backend... --frozen-lockfile
+RUN pnpm install --prod --filter ${packagePrefix}-backend... --frozen-lockfile --ignore-scripts
 
 COPY --from=build /app/${args.game}/${args.tool}/backend/dist ./${args.game}/${args.tool}/backend/dist
 
