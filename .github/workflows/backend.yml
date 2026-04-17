@@ -90,7 +90,7 @@ jobs:
           mkdir -p "$RUNNER_TEMP/deploy-ssh" "$HOME/.ssh"
           key_path="$RUNNER_TEMP/deploy-ssh/id_ed25519"
           known_hosts_path="$RUNNER_TEMP/deploy-ssh/known_hosts"
-          printf '%s' "$DEPLOY_SSH_KEY" > "$key_path"
+          printf '%s\n' "$DEPLOY_SSH_KEY" | tr -d '\r' > "$key_path"
           chmod 600 "$key_path"
           ssh-keyscan -p "$DEPLOY_PORT" "$DEPLOY_HOST" > "$known_hosts_path"
           if ! ssh-keygen -lf "$known_hosts_path" -E sha256 | awk '{print $2}' | grep -Fx "${{ secrets.DEPLOY_FINGERPRINT }}" >/dev/null; then
